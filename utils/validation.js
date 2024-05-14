@@ -13,7 +13,7 @@ const isEmail = (email) => {
 
 const isPassword = (password) => {
    if (password === '') return ERRORS.REQUIRED;
-   if (password.length < 8) return ERRORS.MIN_LENGTH_PASSWORD;
+   // if (password.length < 8) return ERRORS.MIN_LENGTH_PASSWORD;
 
    return null;
 };
