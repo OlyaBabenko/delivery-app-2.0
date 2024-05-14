@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     env: {
-        api: 'https://scaleanalyzer.com',
+        api: 'http://127.0.0.1:8000',
     },
     images: {
         formats: ['image/webp'],
