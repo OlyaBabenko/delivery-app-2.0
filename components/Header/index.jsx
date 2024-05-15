@@ -17,7 +17,14 @@ const Header = () => {
    return (
       <div className='sticky left-0 top-0 flex h-16 items-center gap-2 pr-2'>
          <Link href='/' className='relative block h-full w-60'>
-            <Image src={logo} alt={'logo'} fill={true} style={{ objectFit: 'cover' }} />
+            <Image
+               src={logo}
+               alt={'logo'}
+               sizes='240px'
+               priority
+               fill={true}
+               style={{ objectFit: 'cover' }}
+            />
          </Link>
          <Link
             href='/cart'
