@@ -29,7 +29,6 @@ const useSignIn = () => {
 
    async function submitForm(e) {
       e.preventDefault();
-      console.log(formData);
 
       // const emailError = isEmail(formData.email.toLowerCase());
       const passwordError = isPassword(formData.password);
@@ -49,7 +48,6 @@ const useSignIn = () => {
          setCookie('access', res.token);
          router.push('/');
       } catch (error) {
-         console.log(error);
          setErrors({ email: 'Email may be incorrect', password: 'Password may be incorrect' });
       } finally {
          setIsPending(false);

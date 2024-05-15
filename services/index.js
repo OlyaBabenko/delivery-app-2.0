@@ -9,3 +9,14 @@ export const signInService = (data) => {
       body: formData,
    });
 };
+
+export const signUpService = (data) => {
+   const formData = new FormData();
+   formData.append('email', data.email);
+   formData.append('username', data.username);
+   formData.append('password', data.password);
+   return $api('/users/', {
+      method: 'POST',
+      body: formData,
+   });
+};
