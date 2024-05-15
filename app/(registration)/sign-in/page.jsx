@@ -1,4 +1,4 @@
-import SignInForm from '@/components/Profile/SignInForm';
+import SignInForm from '@/components/Authorization/SignInForm';
 import Link from 'next/link';
 
 const SignIn = () => {

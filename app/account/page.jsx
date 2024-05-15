@@ -1,11 +1,13 @@
 'use client';
-import SignIn from '@/components/Profile/SignInForm';
+import AccountForm from '@/components/AccountForm';
 import useUser from '@/store/user';
 
 const Account = () => {
-   const { userInfo } = useUser();
-    if (!userInfo) return (<SignIn/>)
-   return <></>;
+   return (
+      <div className='flex justify-center pt-16 pb-3'>
+         <AccountForm />
+      </div>
+   );
 };
 
 export default Account;
