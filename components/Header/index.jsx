@@ -10,7 +10,7 @@ import CartIcon from '@/assets/icon/cart.svg';
 import UserIcon from '@/assets/icon/user.svg';
 
 const Header = () => {
-   const { userInfo } = useUser();
+   // const { userInfo } = useUser();
    const { cart } = useCart();
    const count = cart?.length;
 
@@ -38,7 +38,8 @@ const Header = () => {
             )}
          </Link>
          <Link
-            href={userInfo ? '/account' : '/sign-in'}
+            // href={userInfo ? '/account' : '/sign-in'}
+            href={'/sign-in'}
             className='block rounded-full p-2 hover:bg-primary-100'
          >
             <UserIcon className='h-6 w-6 text-primary' />
