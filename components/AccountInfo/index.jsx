@@ -1,12 +1,14 @@
 import PencilIcon from '@/assets/icon/pencil.svg';
 import CheckIcon from '@/assets/icon/check.svg';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import useUser from '@/store/user';
 import UserInfoForm from './UserInfoForm';
 
 const AccountInfo = () => {
-   const { accountInfo } = useUser();
-
+   const { accountInfo, getAccountInfo } = useUser();
+   useEffect(() => {
+      getAccountInfo();
+   }, [getAccountInfo]);
    // console.log('accountInfo', accountInfo);
    // console.log('personalInfo', personalInfo);
 

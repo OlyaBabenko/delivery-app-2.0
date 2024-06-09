@@ -4,13 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import useCart from '@/store/cart';
-import useUser from '@/store/user';
 import logo from '@/assets/image/Yum-yum-delivery-purple.png';
 import CartIcon from '@/assets/icon/cart.svg';
 import UserIcon from '@/assets/icon/user.svg';
 
 const Header = () => {
-   // const { userInfo } = useUser();
    const { cart } = useCart();
    const count = cart?.length;
 
@@ -38,8 +36,7 @@ const Header = () => {
             )}
          </Link>
          <Link
-            // href={userInfo ? '/account' : '/sign-in'}
-            href={'/sign-in'}
+            href={'/account'}
             className='block rounded-full p-2 hover:bg-primary-100'
          >
             <UserIcon className='h-6 w-6 text-primary' />

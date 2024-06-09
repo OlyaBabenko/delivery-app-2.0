@@ -64,10 +64,9 @@ const useUserInfo = () => {
 
    useEffect(() => {
       if (!info || Object.keys(info).length === 0) {
-         getAccountInfo();
          setInfo(accountInfo);
       }
-   }, [accountInfo, getAccountInfo, info]);
+   }, [accountInfo, info]);
 
    return { handleChange, info, errors, submitForm, isActive, setIsActive, isPending, onCancel };
 };

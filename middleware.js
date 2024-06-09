@@ -6,7 +6,9 @@ export function middleware(request) {
    if (publicRoutes.includes(request.nextUrl.pathname) && request.cookies.has('access')) {
       response = NextResponse.redirect(new URL('/', request.url));
    }
-
+   if (request.nextUrl.pathname === '/account' && !request.cookies.has('access')) {
+      response = NextResponse.redirect(new URL('/sign-in', request.url));
+   }
    return response;
 }
 
