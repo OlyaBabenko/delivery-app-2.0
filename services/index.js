@@ -20,3 +20,22 @@ export const signUpService = (data) => {
       body: formData,
    });
 };
+
+export const accountInfoService = () => {
+   return $api('/users/');
+};
+
+export const personalInfoService = (id) => {
+   return $api(`/accounts/userprofile/${id}/`);
+};
+
+export const updateAccountInfoService = (data, id) => {
+   const formData = new FormData();
+   for (const key in data ) {
+      formData.append(key, data[key])
+   }
+   return $api(`/users/${id}/`, {
+      method: 'PATCH',
+      body: formData,
+   })
+}

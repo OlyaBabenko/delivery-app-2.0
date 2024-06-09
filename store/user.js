@@ -1,14 +1,27 @@
+import { accountInfoService, personalInfoService } from '@/services';
 import { create } from 'zustand';
 
 const useUser = create((set) => ({
-   // userInfo: null,
-   userInfo: {
-      username: 'Olya',
-      email: 'test1@gmail.com',
-      gender: 'Female',
-      birth: '03.01.1998',
+   accountInfo: null,
+   personalInfo: null,
+   setPersonalInfo: (info) => set({ personalInfo: info }),
+   setAccountInfo: (info) => set({ accountInfo: info }),
+   getPersonalInfo: async (id) => {
+      try {
+         const response = await personalInfoService(id);
+         set({ personalInfo: response });
+      } catch (error) {
+         console.log(error);
+      }
    },
-   setUser: (info) => set({ userInfo: info }),
+   getAccountInfo: async () => {
+      try {
+         const response = await accountInfoService();
+         set({ accountInfo: response.data });
+      } catch (error) {
+         console.log(error);
+      }
+   },
 }));
 
 export default useUser;
