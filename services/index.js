@@ -31,11 +31,22 @@ export const personalInfoService = (id) => {
 
 export const updateAccountInfoService = (data, id) => {
    const formData = new FormData();
-   for (const key in data ) {
-      formData.append(key, data[key])
+   for (const key in data) {
+      formData.append(key, data[key]);
    }
    return $api(`/users/${id}/`, {
       method: 'PATCH',
       body: formData,
-   })
-}
+   });
+};
+
+export const updatePersonalInfoService = (data, id) => {
+   const formData = new FormData();
+   for (const key in data) {
+      formData.append(key, data[key]);
+   }
+   return $api(`/accounts/userprofile/${id}/`, {
+      method: 'PATCH',
+      body: formData,
+   });
+};

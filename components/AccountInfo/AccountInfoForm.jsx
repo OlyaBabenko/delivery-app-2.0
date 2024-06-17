@@ -1,11 +1,11 @@
 import PencilIcon from '@/assets/icon/pencil.svg';
 import CheckIcon from '@/assets/icon/check.svg';
 import CancelIcon from '@/assets/icon/cancel.svg';
-import useUserInfo from '@/hooks/useUserInfo';
+import useAccountInfo from '@/hooks/useAccountInfo';
 
-const UserInfoForm = () => {
+const AccountInfoForm = () => {
    const { handleChange, isActive, setIsActive, submitForm, errors, info, onCancel } =
-      useUserInfo();
+      useAccountInfo();
    return (
       <form className='mt-12' onSubmit={submitForm}>
          <div className='mb-4 flex justify-between'>
@@ -75,4 +75,4 @@ const UserInfoForm = () => {
    );
 };
 
-export default UserInfoForm;
+export default AccountInfoForm;

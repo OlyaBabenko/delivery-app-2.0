@@ -3,7 +3,7 @@ import useUser from '@/store/user';
 import validation from '@/utils/validation';
 import { useEffect, useState } from 'react';
 
-const useUserInfo = () => {
+const useAccountInfo = () => {
    const [info, setInfo] = useState();
    const [isActive, setIsActive] = useState(false);
    const [isPending, setIsPending] = useState(false);
@@ -37,8 +37,6 @@ const useUserInfo = () => {
 
       for (const key in info) {
          if (info[key] !== accountInfo[key]) {
-            console.log('info[key]: ', info[key]);
-            console.log('accountInfo[key]: ', accountInfo[key]);
             formData[key] = info[key];
          }
       }
@@ -71,4 +69,4 @@ const useUserInfo = () => {
    return { handleChange, info, errors, submitForm, isActive, setIsActive, isPending, onCancel };
 };
 
-export default useUserInfo;
+export default useAccountInfo;
