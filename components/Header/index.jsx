@@ -13,7 +13,7 @@ const Header = () => {
    const count = cart?.length;
 
    return (
-      <div className='sticky left-0 top-0 flex h-16 items-center gap-2 pr-2'>
+      <div className='sticky left-0 top-0 z-10 flex h-16 w-full items-center gap-2 bg-white pr-2 shadow-md'>
          <Link href='/' className='relative block h-full w-60'>
             <Image
                src={logo}
@@ -35,10 +35,7 @@ const Header = () => {
                </span>
             )}
          </Link>
-         <Link
-            href={'/account'}
-            className='block rounded-full p-2 hover:bg-primary-100'
-         >
+         <Link href={'/account'} className='block rounded-full p-2 hover:bg-primary-100'>
             <UserIcon className='h-6 w-6 text-primary' />
          </Link>
       </div>

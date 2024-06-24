@@ -1,5 +1,6 @@
 import $api from '@/api';
 
+//auth
 export const signInService = (data) => {
    const formData = new FormData();
    formData.append('username', data.email);
@@ -21,6 +22,7 @@ export const signUpService = (data) => {
    });
 };
 
+//user info
 export const accountInfoService = () => {
    return $api('/users/');
 };
@@ -49,4 +51,13 @@ export const updatePersonalInfoService = (data, id) => {
       method: 'PATCH',
       body: formData,
    });
+};
+
+//products
+export const restaurantListService = () => {
+   return $api('/products/restaurant/');
+};
+
+export const productsListService = (name) => {
+   return $api(`/products/product/${encodeURIComponent(name)}/`);
 };
