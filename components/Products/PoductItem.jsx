@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import StarIcon from '@/assets/icon/star.svg';
+import Link from 'next/link';
 
 const ProductItem = ({ product }) => {
    const rating = product.id / 100000;
@@ -7,7 +8,10 @@ const ProductItem = ({ product }) => {
       return `${src}?w=600`;
    };
    return (
-      <div className='rounded-md bg-white p-2 shadow-md'>
+      <Link
+         href={`/products/${product.id}`}
+         className='rounded-md bg-white p-2 shadow-md transition-all duration-300 hover:scale-110'
+      >
          <div className='flex h-full flex-col items-center'>
             <div className='relative h-36 w-full'>
                <Image
@@ -54,7 +58,7 @@ const ProductItem = ({ product }) => {
                Buy
             </button>
          </div>
-      </div>
+      </Link>
    );
 };
 

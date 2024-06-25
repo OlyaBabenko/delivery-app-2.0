@@ -61,3 +61,7 @@ export const restaurantListService = () => {
 export const productsListService = (name) => {
    return $api(`/products/product/${encodeURIComponent(name)}/`);
 };
+
+export const productItemService = (id) => {
+   return $api(`/products/${id}/`);
+};
