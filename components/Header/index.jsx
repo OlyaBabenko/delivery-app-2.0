@@ -14,14 +14,14 @@ const Header = () => {
 
    return (
       <div className='sticky left-0 top-0 z-10 flex h-16 w-full items-center gap-2 bg-white pr-2 shadow-md'>
-         <Link href='/' className='relative block h-full w-60'>
+         <Link href='/products' className='relative block h-full w-60'>
             <Image
                src={logo}
                alt={'logo'}
                sizes='240px'
                priority
                fill={true}
-               style={{ objectFit: 'cover' }}
+               className='object-cover'
             />
          </Link>
          <Link
