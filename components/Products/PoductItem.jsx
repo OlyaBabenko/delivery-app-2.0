@@ -1,16 +1,21 @@
 import Image from 'next/image';
 import StarIcon from '@/assets/icon/star.svg';
 import Link from 'next/link';
+import { addToCart } from '@/store/cart';
 
 const ProductItem = ({ product }) => {
    const rating = product.id / 100000;
+   const onAddToCart = (e) => {
+      e.preventDefault();
+      addToCart(product);
+   };
    const imageLoader = ({ src }) => {
       return `${src}?w=600`;
    };
    return (
       <Link
          href={`/products/${product.id}`}
-         className='rounded-md bg-white p-2 shadow-md transition-all duration-300 hover:scale-110'
+         className='rounded-md bg-white/60 p-2 shadow-md transition-all duration-300 hover:scale-110 hover:bg-white'
       >
          <div className='flex h-full flex-col items-center'>
             <div className='relative h-36 w-full'>
@@ -54,7 +59,10 @@ const ProductItem = ({ product }) => {
             >
                {product.actualPrice} ₴
             </span>
-            <button className='mt-1 w-full rounded-sm bg-primary-400 px-2 py-1 font-semibold text-white transition-all hover:scale-105 hover:bg-primary active:bg-primary/90'>
+            <button
+               onClick={onAddToCart}
+               className='mt-1 w-full rounded-sm bg-primary-400 px-2 py-1 font-semibold text-white transition-all hover:scale-105 hover:bg-primary active:bg-primary/90'
+            >
                Buy
             </button>
          </div>

@@ -2,6 +2,7 @@
 import useProduct from '@/hooks/useProduct';
 import Image from 'next/image';
 import StarIcon from '@/assets/icon/star.svg';
+import { addToCart } from '@/store/cart';
 
 const ProductItem = ({ params }) => {
    const { product } = useProduct(params.id);
@@ -71,7 +72,10 @@ const ProductItem = ({ params }) => {
                </div>
             </div>
 
-            <button className='mt-5 w-full min-w-32 rounded-md bg-primary px-3 py-1 text-lg text-white hover:bg-primary-500 active:bg-primary/90'>
+            <button
+               onClick={() => addToCart(product)}
+               className='mt-5 w-full min-w-32 rounded-md bg-primary px-3 py-1 text-lg text-white hover:bg-primary-500 active:bg-primary/90'
+            >
                Buy
             </button>
          </div>

@@ -3,13 +3,13 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import useCart from '@/store/cart';
 import logo from '@/assets/image/Yum-yum-delivery-purple.png';
 import CartIcon from '@/assets/icon/cart.svg';
 import UserIcon from '@/assets/icon/user.svg';
+import { useCart } from '@/store/cart';
 
 const Header = () => {
-   const { cart } = useCart();
+   const cart = useCart();
    const count = cart?.length;
 
    return (

@@ -1,10 +1,30 @@
-import { create } from "zustand";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-const useCart = create((set) => ({
-    cart: null,
-    addToCart: (item) => set({ cart: { ...cart, item } }),
-    removeFromCart: (item) => set({ cart: cart.filter((el) => el.id !== item.id) }),
-    resetCart: () => set({cart: null})
-}))
+const useCartStore = create(
+   persist(
+      (set, get) => ({
+         cart: null,
+      }),
+      {
+         name: 'cart-storage',
+      },
+   ),
+);
 
-export default useCart;
+export const useCart = () => useCartStore((state) => state.cart);
+
+export const addToCart = (item) => {
+   const state = useCartStore.getState();
+   if (state.cart === null) {
+      return useCartStore.setState({ cart: [{ ...item, count: 1 }] });
+   }
+   const index = state.cart.findIndex((el) => el.id === item.id);
+   if (index < 0) {
+      return useCartStore.setState({ cart: [...state.cart, { ...item, count: 1 }] });
+   } else {
+      return useCartStore.setState({
+         cart: state.cart.map((el, i) => (i === index ? { ...el, count: el.count + 1 } : el)),
+      });
+   }
+};
