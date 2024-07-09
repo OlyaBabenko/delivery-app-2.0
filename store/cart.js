@@ -1,3 +1,4 @@
+import { toast } from 'sonner';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -24,7 +25,16 @@ const updateTotalPrice = () => {
 
 export const addToCart = (item) => {
    const { cart = [] } = useCartStore.getState();
-   if (cart[0]?.restaurant !== item.restaurant) return;
+   if (!cart) {
+      useCartStore.setState({ cart: [{ ...item, count: 1 }] });
+      toast.success('The dish has been created.');
+      updateTotalPrice();
+      return;
+   }
+   if (cart && cart[0]?.restaurant !== item.restaurant) {
+      toast.error('You can add dishes from only one restaurant.');
+      return;
+   }
    const index = cart.findIndex((el) => el.id === item.id);
    if (index === -1) {
       useCartStore.setState({ cart: [...cart, { ...item, count: 1 }] });
@@ -32,6 +42,7 @@ export const addToCart = (item) => {
       cart[index].count += 1;
       useCartStore.setState({ cart: [...cart] });
    }
+   toast.success('The dish has been added');
    updateTotalPrice();
 };
 
@@ -44,6 +55,15 @@ export const deleteFromCart = (item) => {
       .map((el, i) => (i === index ? { ...el, count: el.count - 1 } : el))
       .filter((el) => el.count > 0);
 
-   useCartStore.setState({ cart: updatedCart });
-   updateTotalPrice();
+   if (!updatedCart.length) {
+      resetCart();
+   } else {
+      useCartStore.setState({ cart: updatedCart });
+      updateTotalPrice();
+   }
+   toast.success('The dish has been deleted');
+};
+
+export const resetCart = () => {
+   useCartStore.setState({ cart: null, totalPrice: 0 });
 };

@@ -1,5 +1,7 @@
+import { isPossiblePhoneNumber } from 'react-phone-number-input';
+
 const validation = () => {
-   return { isEmail, isPassword, isConfirmPassword, isName };
+   return { isEmail, isPassword, isConfirmPassword, isName, isPhone };
 };
 
 const emailRegex =
@@ -29,11 +31,19 @@ const isName = (name) => {
 
    return null;
 };
+
+const isPhone = (phone) => {
+   if (!isPossiblePhoneNumber(phone)) return ERRORS.INVALID_PHONE;
+
+   return null;
+};
+
 const ERRORS = {
    REQUIRED: 'Field is required',
    INVALID_EMAIL: 'Email is invalid',
    NOT_THE_SAME_PASSWORD: 'Password is wrong',
    MIN_LENGTH_PASSWORD: 'Must be of minimum 8 characters',
+   INVALID_PHONE: 'Phone number is invalid',
 };
 
 export default validation;

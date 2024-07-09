@@ -5,6 +5,7 @@ export const signInService = (data) => {
    const formData = new FormData();
    formData.append('username', data.email);
    formData.append('password', data.password);
+
    return $api('/users/auth/', {
       method: 'POST',
       body: formData,
@@ -16,6 +17,7 @@ export const signUpService = (data) => {
    formData.append('email', data.email);
    formData.append('username', data.username);
    formData.append('password', data.password);
+
    return $api('/users/', {
       method: 'POST',
       body: formData,
@@ -64,4 +66,27 @@ export const productsListService = (name) => {
 
 export const productItemService = (id) => {
    return $api(`/products/${id}/`);
+};
+
+//recipient
+export const createRecipientService = (data) => {
+   const formData = new FormData();
+   formData.append('first_name', data.first_name);
+   formData.append('last_name', data.last_name);
+   formData.append('address', data.address);
+   formData.append('phone', data.phone);
+   formData.append('user', data.user);
+
+   return $api('/products/recipient/', {
+      method: 'POST',
+      body: formData,
+   });
+};
+
+//cart
+export const createOrderService = (data, id) => {
+   return $api('/products/order/', {
+      method: 'POST',
+      body: { items: data, recipient: id },
+   });
 };
