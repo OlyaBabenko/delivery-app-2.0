@@ -60,13 +60,13 @@ const ProductItem = ({ params }) => {
                </div>
                <div className='flex flex-col gap-1'>
                   {product?.oldPrice && (
-                     <span className='text-sm text-grey-500 line-through'>{product.oldPrice}</span>
+                     <span className='text-sm text-grey-500 line-through'>{product.oldPrice} ₴</span>
                   )}
                   {product?.actualPrice && (
                      <span
                         className={` text-2xl font-semibold ${product.oldPrice ? 'text-error' : 'text-primary-800'}`}
                      >
-                        {product.actualPrice}
+                        {product.actualPrice} ₴
                      </span>
                   )}
                </div>

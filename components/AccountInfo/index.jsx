@@ -4,13 +4,12 @@ import AccountInfoForm from './AccountInfoForm';
 import PersonalInfoForm from './PersonalInfoForm';
 
 const AccountInfo = () => {
-   const { accountInfo, getAccountInfo, getPersonalInfo } = useUser();
+   const { accountInfo, getPersonalInfo } = useUser();
    useEffect(() => {
-      getAccountInfo();
       if (accountInfo?.id) {
          getPersonalInfo(accountInfo?.id);
       }
-   }, [accountInfo?.id, getAccountInfo, getPersonalInfo]);
+   }, [accountInfo?.id, getPersonalInfo]);
 
    return (
       <div className='w-full max-w-2xl px-2 text-primary'>
