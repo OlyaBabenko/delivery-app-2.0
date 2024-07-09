@@ -1,17 +1,21 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import logo from '@/assets/image/Yum-yum-delivery-purple.png';
 import CartIcon from '@/assets/icon/cart.svg';
 import UserIcon from '@/assets/icon/user.svg';
 import { useCart } from '@/store/cart';
+import useUser from '@/store/user';
 
 const Header = () => {
    const cart = useCart();
    const count = cart?.length;
-
+   const { getAccountInfo } = useUser();
+   useEffect(() => {
+      getAccountInfo();
+   }, [getAccountInfo]);
    return (
       <div className='sticky left-0 top-0 z-10 flex h-16 w-full items-center gap-2 bg-white pr-2 shadow-md'>
          <Link href='/products' className='relative block h-full w-60'>
