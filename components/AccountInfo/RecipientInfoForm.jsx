@@ -8,9 +8,9 @@ import useRecipient from '@/hooks/useRecipient';
 
 const RecipientInfoForm = () => {
    const [isActive, setIsActive] = useState(false);
-   const { info } = useRecipient();
+   const { info, errors, handleChange, handleChangePhone, onSubmit } = useRecipient();
    return (
-      <form className='mt-12'>
+      <form className='mt-12' onSubmit={onSubmit}>
          <div className='mb-4 flex justify-between'>
             <h3 className='text-xl'>Recipient information</h3>
             <div className='space-x-2'>
@@ -45,15 +45,15 @@ const RecipientInfoForm = () => {
                name='first_name'
                id='first_name'
                disabled={!isActive}
-               //   onInput={handleChange}
+               onInput={handleChange}
                value={info?.first_name ?? ''}
                className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
             />
-            {/* {errors.first_name && (
-                  <span className='absolute left-32 top-[calc(100%+2px)] text-xs text-error'>
-                     {errors.first_name}
-                  </span>
-               )} */}
+            {errors.first_name && (
+               <span className='absolute left-32 top-[calc(100%+2px)] text-xs text-error'>
+                  {errors.first_name}
+               </span>
+            )}
          </div>
          <div className='relative mt-12 grid gap-1 md:grid-cols-[120px_auto]'>
             <label htmlFor='last_name' className='self-center text-primary-300'>
@@ -64,15 +64,15 @@ const RecipientInfoForm = () => {
                name='last_name'
                id='last_name'
                disabled={!isActive}
-               //   onInput={handleChange}
+               onInput={handleChange}
                value={info?.last_name ?? ''}
                className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
             />
-            {/* {errors.last_name && (
-                  <span className='absolute left-32 top-[calc(100%+2px)] text-xs text-error'>
-                     {errors.last_name}
-                  </span>
-               )} */}
+            {errors.last_name && (
+               <span className='absolute left-32 top-[calc(100%+2px)] text-xs text-error'>
+                  {errors.last_name}
+               </span>
+            )}
          </div>
          <div className='relative mt-12 grid gap-1 md:grid-cols-[120px_auto]'>
             <label htmlFor='address' className='self-center text-primary-300'>
@@ -83,15 +83,15 @@ const RecipientInfoForm = () => {
                name='address'
                id='address'
                disabled={!isActive}
-               //   onInput={handleChange}
+               onInput={handleChange}
                value={info?.address ?? ''}
                className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
             />
-            {/* {errors.address && (
-                  <span className='absolute left-32 top-[calc(100%+2px)] text-xs text-error'>
-                     {errors.address}
-                  </span>
-               )} */}
+            {errors.address && (
+               <span className='absolute left-32 top-[calc(100%+2px)] text-xs text-error'>
+                  {errors.address}
+               </span>
+            )}
          </div>
          <div className='relative mt-12 grid gap-1 md:grid-cols-[120px_auto]'>
             <label htmlFor='phone' className='self-center text-primary-300'>
@@ -102,19 +102,19 @@ const RecipientInfoForm = () => {
                name='phone'
                id='phone'
                disabled={!isActive}
-               //   onChange={handleChangePhone}
+               onChange={handleChangePhone}
                international
                countryCallingCodeEditable={false}
                defaultCountry='UA'
-                 value={info.phone}
+               value={info?.phone}
                // value={info?.phone ?? ''}
                className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none has-[:disabled]:border-primary-200'
             />
-            {/* {errors.phone && (
-                  <span className='absolute left-32 top-[calc(100%+2px)] text-xs text-error'>
-                     {errors.phone}
-                  </span>
-               )} */}
+            {errors.phone && (
+               <span className='absolute left-32 top-[calc(100%+2px)] text-xs text-error'>
+                  {errors.phone}
+               </span>
+            )}
          </div>
       </form>
    );

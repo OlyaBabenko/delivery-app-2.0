@@ -3,14 +3,21 @@ import { useTotalPrice } from '@/store/cart';
 import useRecipient from '@/hooks/useRecipient';
 import PhoneInputWithCountrySelect from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import useOrder from '@/hooks/useOrder';
 
 const RecipientForm = () => {
    const { info, errors, isFormShow, showForm, handleChange, onSubmit, handleChangePhone } =
       useRecipient();
    const total = useTotalPrice();
+   const { onSubmitOrder } = useOrder();
+   const submitOrder = async (e) => {
+      e.preventDefault();
+      await onSubmit(e);
+      await onSubmitOrder(info.id);
+   };
 
    return (
-      <form onSubmit={onSubmit} className='flex w-full flex-col md:flex-row md:gap-6'>
+      <form onSubmit={submitOrder} className='flex w-full flex-col md:flex-row md:gap-6'>
          <div className={`${isFormShow ? '' : 'hidden'} w-full max-w-2xl space-y-4 pt-6`}>
             <h2 className='text-center text-xl font-semibold md:text-left'>Recipient</h2>
             <div className='relative grid gap-1 md:grid-cols-[120px_auto]'>
@@ -22,7 +29,7 @@ const RecipientForm = () => {
                   name='first_name'
                   id='first_name'
                   onInput={handleChange}
-                     value={info?.first_name ?? ''}
+                  value={info?.first_name ?? ''}
                   className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
                />
                {errors.first_name && (
@@ -40,7 +47,7 @@ const RecipientForm = () => {
                   name='last_name'
                   id='last_name'
                   onInput={handleChange}
-                     value={info?.last_name ?? ''}
+                  value={info?.last_name ?? ''}
                   className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
                />
                {errors.last_name && (
@@ -58,7 +65,7 @@ const RecipientForm = () => {
                   name='address'
                   id='address'
                   onInput={handleChange}
-                     value={info?.address ?? ''}
+                  value={info?.address ?? ''}
                   className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
                />
                {errors.address && (

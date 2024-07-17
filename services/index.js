@@ -87,6 +87,13 @@ export const createRecipientService = (data) => {
    });
 };
 
+export const updateRecipientService = (data, id) => {
+   return $api(`/products/recipient/${id}/`, {
+      method: 'PATCH',
+      body: data,
+   })
+}
+
 //cart
 export const createOrderService = (data, id) => {
    return $api('/products/order/', {

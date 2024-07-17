@@ -1,8 +1,11 @@
-import { createOrderService, createRecipientService, recipientService } from '@/services';
-import { resetCart, useCart } from '@/store/cart';
+import {
+   createRecipientService,
+   recipientService,
+   updateRecipientService,
+} from '@/services';
 import useUser from '@/store/user';
 import validation from '@/utils/validation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 const useRecipient = () => {
@@ -22,7 +25,6 @@ const useRecipient = () => {
       phone: '',
    });
    const { isName, isPhone } = validation();
-   const cart = useCart();
    const { accountInfo } = useUser();
 
    const showForm = (event) => {
@@ -60,34 +62,51 @@ const useRecipient = () => {
 
       if (firstNameError || lastNameError || addressError || phoneError) return;
 
-      try {
-         setIsPending(true);
-         const { id } = await createRecipientService({ ...info, user: accountInfo?.id });
-         const order = cart.map((item) => ({ product: item.id, quantity: item.count }));
-         await createOrderService(order, id);
-         resetCart();
-         toast.success('Order has been created.');
-      } catch (error) {
-         if (error?.data?.user) {
-            toast.error(error.data.user);
-         } else {
-            toast.error('Order has not been created.');
+      if (!currentInfo) {
+         try {
+            setIsPending(true);
+            const recipient = await createRecipientService({ ...info, user: accountInfo?.id });
+            setCurrentInfo(recipient);
+            toast.success('Recipient has been created.');
+         } catch {
+            toast.error('Recipient has not been created.');
+         } finally {
+            setIsPending(false);
          }
-      } finally {
-         setIsPending(false);
+      } else {
+         const newRecipient = {};
+         for (const key in info) {
+            info[key] !== currentInfo[key] && (newRecipient[key] = info[key]);
+         }
+         if (Object.keys(newRecipient).length === 0) return;
+
+         try {
+            setIsPending(true);
+            const recipient = await updateRecipientService(newRecipient, currentInfo.id);
+            setCurrentInfo(recipient);
+            toast.success('Recipient has been updated.');
+         } catch (error) {
+            toast.error('Recipient has not been updated.');
+         } finally {
+            setIsPending(false);
+         }
       }
    };
 
-   useEffect(() => {
+   const getData = useCallback(async () => {
       try {
-         recipientService(accountInfo?.id).then((data) => {
-            setCurrentInfo(data);
-            setInfo(data);
-         });
-      } catch (error) {
-         console.log(error);
+         const data = await recipientService(accountInfo.id);
+         setCurrentInfo(data);
+         setInfo(data);
+         return data?.id && data;
+      } catch {
+         return;
       }
    }, [accountInfo?.id]);
+
+   useEffect(() => {
+      accountInfo?.id && getData();
+   }, [accountInfo?.id, getData]);
 
    return {
       info,
