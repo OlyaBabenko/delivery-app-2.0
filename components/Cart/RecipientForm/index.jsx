@@ -22,7 +22,7 @@ const RecipientForm = () => {
                   name='first_name'
                   id='first_name'
                   onInput={handleChange}
-                  //    value={info?.first_name ?? ''}
+                     value={info?.first_name ?? ''}
                   className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
                />
                {errors.first_name && (
@@ -40,7 +40,7 @@ const RecipientForm = () => {
                   name='last_name'
                   id='last_name'
                   onInput={handleChange}
-                  //    value={info?.last_name ?? ''}
+                     value={info?.last_name ?? ''}
                   className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
                />
                {errors.last_name && (
@@ -58,7 +58,7 @@ const RecipientForm = () => {
                   name='address'
                   id='address'
                   onInput={handleChange}
-                  //    value={info?.address ?? ''}
+                     value={info?.address ?? ''}
                   className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
                />
                {errors.address && (
@@ -80,7 +80,6 @@ const RecipientForm = () => {
                   countryCallingCodeEditable={false}
                   defaultCountry='UA'
                   value={info.phone}
-                  //    value={info?.phone ?? ''}
                   className='border-b border-primary-400 bg-primary-100/0 focus:border-b focus-visible:outline-none disabled:border-primary-200'
                />
                {errors.phone && (

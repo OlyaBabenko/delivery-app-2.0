@@ -1,13 +1,14 @@
-import { createOrderService, createRecipientService } from '@/services';
+import { createOrderService, createRecipientService, recipientService } from '@/services';
 import { resetCart, useCart } from '@/store/cart';
 import useUser from '@/store/user';
 import validation from '@/utils/validation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
 const useRecipient = () => {
    const [isPending, setIsPending] = useState(false);
    const [isFormShow, setIsFormShow] = useState(false);
+   const [currentInfo, setCurrentInfo] = useState(null);
    const [info, setInfo] = useState({
       first_name: '',
       last_name: '',
@@ -76,6 +77,18 @@ const useRecipient = () => {
          setIsPending(false);
       }
    };
+
+   useEffect(() => {
+      try {
+         recipientService(accountInfo?.id).then((data) => {
+            setCurrentInfo(data);
+            setInfo(data);
+         });
+      } catch (error) {
+         console.log(error);
+      }
+   }, [accountInfo?.id]);
+
    return {
       info,
       errors,

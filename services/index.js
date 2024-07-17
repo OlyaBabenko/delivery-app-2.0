@@ -69,6 +69,10 @@ export const productItemService = (id) => {
 };
 
 //recipient
+export const recipientService = (id) => {
+   return $api(`/products/recipient/${id}`);
+}
+
 export const createRecipientService = (data) => {
    const formData = new FormData();
    formData.append('first_name', data.first_name);

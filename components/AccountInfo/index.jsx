@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import useUser from '@/store/user';
 import AccountInfoForm from './AccountInfoForm';
 import PersonalInfoForm from './PersonalInfoForm';
+import RecipientInfoForm from './RecipientInfoForm';
 
 const AccountInfo = () => {
    const { accountInfo, getPersonalInfo } = useUser();
@@ -16,6 +17,7 @@ const AccountInfo = () => {
          <h2 className='text-center text-2xl font-medium'>Welcome, {accountInfo?.username}!</h2>
          <AccountInfoForm />
          <PersonalInfoForm />
+         <RecipientInfoForm />
       </div>
    );
 };
