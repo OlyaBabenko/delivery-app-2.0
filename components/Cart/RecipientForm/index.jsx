@@ -9,15 +9,9 @@ const RecipientForm = () => {
    const { info, errors, isFormShow, showForm, handleChange, onSubmit, handleChangePhone } =
       useRecipient();
    const total = useTotalPrice();
-   const { onSubmitOrder } = useOrder();
-   const submitOrder = async (e) => {
-      e.preventDefault();
-      await onSubmit(e);
-      await onSubmitOrder(info.id);
-   };
 
    return (
-      <form onSubmit={submitOrder} className='flex w-full flex-col md:flex-row md:gap-6'>
+      <form onSubmit={onSubmit} className='flex w-full flex-col md:flex-row md:gap-6'>
          <div className={`${isFormShow ? '' : 'hidden'} w-full max-w-2xl space-y-4 pt-6`}>
             <h2 className='text-center text-xl font-semibold md:text-left'>Recipient</h2>
             <div className='relative grid gap-1 md:grid-cols-[120px_auto]'>

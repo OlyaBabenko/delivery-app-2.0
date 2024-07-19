@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import PencilIcon from '@/assets/icon/pencil.svg';
 import CheckIcon from '@/assets/icon/check.svg';
 import CancelIcon from '@/assets/icon/cancel.svg';
@@ -7,8 +6,16 @@ import 'react-phone-number-input/style.css';
 import useRecipient from '@/hooks/useRecipient';
 
 const RecipientInfoForm = () => {
-   const [isActive, setIsActive] = useState(false);
-   const { info, errors, handleChange, handleChangePhone, onSubmit } = useRecipient();
+   const {
+      info,
+      errors,
+      isActive,
+      handleChange,
+      handleChangePhone,
+      onSubmit,
+      onCancel,
+      setIsActive,
+   } = useRecipient();
    return (
       <form className='mt-12' onSubmit={onSubmit}>
          <div className='mb-4 flex justify-between'>
@@ -22,7 +29,7 @@ const RecipientInfoForm = () => {
                </button>
                <button
                   type='button'
-                  //   onClick={onCancel}
+                  onClick={onCancel}
                   className={`rounded-full bg-error-200 p-2 hover:bg-error-300/70 active:bg-error-300/50 ${!isActive ? 'hidden' : ''}`}
                >
                   <CancelIcon className='pointer-events-none h-4 w-4 font-semibold text-error' />

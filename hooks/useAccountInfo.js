@@ -22,6 +22,10 @@ const useAccountInfo = () => {
 
    const onCancel = () => {
       setInfo(accountInfo);
+      setErrors({
+         email: '',
+         username: '',
+      });
       setIsActive(false);
    };
 

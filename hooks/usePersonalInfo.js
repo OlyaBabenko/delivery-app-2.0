@@ -25,6 +25,10 @@ const usePersonalInfo = () => {
 
    const onCancel = () => {
       setInfo(personalInfo);
+      setErrors({
+         gender: '',
+         date_of_birth: '',
+      });
       setIsActive(false);
    };
 
