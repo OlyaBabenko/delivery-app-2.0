@@ -94,10 +94,14 @@ export const updateRecipientService = (data, id) => {
    })
 }
 
-//cart
+//order
 export const createOrderService = (data, id) => {
    return $api('/products/order/', {
       method: 'POST',
       body: { items: data, recipient: id },
    });
 };
+
+export const orderListService = () => {
+   return $api('products/order/')
+}
