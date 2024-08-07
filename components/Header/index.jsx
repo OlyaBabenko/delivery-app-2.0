@@ -8,11 +8,12 @@ import CartIcon from '@/assets/icon/cart.svg';
 import UserIcon from '@/assets/icon/user.svg';
 import { useCart } from '@/store/cart';
 import useUser from '@/store/user';
+import { getCookieByKey } from '@/utils/cookies';
 
 const Header = () => {
    const cart = useCart();
    const count = cart?.length;
-   const { getAccountInfo } = useUser();
+   const { getAccountInfo, personalInfo } = useUser();
    useEffect(() => {
       getAccountInfo();
    }, [getAccountInfo]);
@@ -28,6 +29,14 @@ const Header = () => {
                className='object-cover'
             />
          </Link>
+         <div className='space-x-3'>
+            <Link href={'/'} className='text-primary-700'>
+               Home
+            </Link>
+            <Link href={'/products'} className='text-primary-700'>
+               Dishes
+            </Link>
+         </div>
          <Link
             href='/cart'
             className='relative ml-auto block rounded-full p-2 hover:bg-primary-100'
@@ -39,8 +48,21 @@ const Header = () => {
                </span>
             )}
          </Link>
-         <Link href={'/account'} className='block rounded-full p-2 hover:bg-primary-100'>
-            <UserIcon className='h-6 w-6 text-primary' />
+         <Link
+            href={getCookieByKey('access') ? '/account' : '/sign-in'}
+            className={`block rounded-full ${personalInfo?.profile_picture ? 'relative h-10 w-10 p-0' : 'p-2 hover:bg-primary-100'}`}
+         >
+            {personalInfo?.profile_picture && (
+               <Image
+                  src={personalInfo?.profile_picture}
+                  alt='profile_picture'
+                  priority
+                  sizes='100%'
+                  fill={true}
+                  className='rounded-full object-cover shadow-lg'
+               />
+            )}
+            {!personalInfo?.profile_picture && <UserIcon className='h-6 w-6 text-primary' />}
          </Link>
       </div>
    );

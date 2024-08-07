@@ -1,12 +1,14 @@
 import { signInService } from '@/services';
+import useUser from '@/store/user';
 import { setCookie } from '@/utils/cookies';
 import validation from '@/utils/validation';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const useSignIn = () => {
-   const [isPending, setIsPending] = useState(false);
    const router = useRouter();
+   const { getAccountInfo } = useUser();
+   const [isPending, setIsPending] = useState(false);
    const [formData, setFormData] = useState({
       email: '',
       password: '',
@@ -46,6 +48,7 @@ const useSignIn = () => {
             password: formData.password,
          });
          setCookie('access', res.token);
+         getAccountInfo();
          router.push('/');
       } catch (error) {
          setErrors({ email: 'Email may be incorrect', password: 'Password may be incorrect' });

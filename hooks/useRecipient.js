@@ -62,7 +62,6 @@ const useRecipient = () => {
 
    const handleChangePhone = (value) => {
       setInfo((state) => ({ ...state, phone: value }));
-      console.log(value);
    };
 
    const onSubmit = async (event) => {
@@ -126,8 +125,8 @@ const useRecipient = () => {
          setCurrentInfo(data);
          setInfo(data);
          return data?.id && data;
-      } catch {
-         return;
+      } catch (error) {
+         return null;
       }
    }, [accountInfo?.id]);
 
