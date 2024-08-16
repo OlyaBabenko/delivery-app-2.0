@@ -5,6 +5,8 @@ const nextConfig = {
    },
    images: {
       formats: ['image/webp'],
+      loader: 'custom',
+      loaderFile: './utils/imageLoader.js',
       remotePatterns: [
          {
             protocol: 'http',

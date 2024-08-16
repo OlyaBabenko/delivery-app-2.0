@@ -5,8 +5,10 @@ const OrderList = () => {
    const { orderList } = useOrderList();
    return (
       orderList && (
-         <div>
-            {orderList && orderList.map((order) => <OrderItem key={order.id} order={order} />)}
+         <div className='mx-auto pb-3 pt-8 md:max-w-screen-lg space-y-3'>
+            {orderList.map((order) => (
+               <OrderItem key={order.id} order={order} />
+            ))}
          </div>
       )
    );

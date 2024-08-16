@@ -36,6 +36,9 @@ const Header = () => {
             <Link href={'/products'} className='text-primary-700'>
                Dishes
             </Link>
+            <Link href={'/order'} className='text-primary-700'>
+               My orders
+            </Link>
          </div>
          <Link
             href='/cart'
